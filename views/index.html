@@ -1,6 +1,7 @@
 <!-- views/index.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8">
   <title>AutoDesliga - Desligamento Automático</title>
@@ -8,16 +9,16 @@
   <!-- Import da Fonte (Exemplo: 'Poppins') -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link 
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" 
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="icon" href="imgs/Logo.png">
   <!-- CSS principal -->
   <link rel="stylesheet" href="/css/styles.css">
-  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
   <!-- Cabeçalho -->
   <header class="site-header">
@@ -26,7 +27,7 @@
         <img src="/imgs/Logo.png" alt="Logo do Site" class="site-logo">
         AutoDesliga
       </h1>
-      
+
       <nav>
         <ul class="nav-links">
           <li><a href="#conceito">Conceito</a></li>
@@ -40,7 +41,8 @@
   <!-- Seção: Conceito -->
   <section id="conceito" class="section section-gradient">
     <div class="container">
-      <h2>Conceito</h2>
+      <h2><i class="fas fa-computer"></i>
+        Conceito</h2>
       <p>
         O <strong>AutoDesliga</strong> é uma aplicação simples, porém muito útil,
         que permite ao usuário programar o desligamento automático do computador
@@ -58,7 +60,8 @@
   <!-- Seção: Como Funciona -->
   <section id="funcionamento" class="section bg-light">
     <div class="container">
-      <h2>Como Funciona</h2>
+      <h2><i class="fas fa-diagram-project"></i>
+        Como Funciona</h2>
       <p>
         Nosso sistema utiliza os comandos nativos do Windows para agendar o desligamento.
         Basta informar um horário exato (<em>HH:MM</em>) ou um intervalo em minutos.
@@ -76,16 +79,16 @@
   <!-- Seção: Configuração da Aplicação -->
   <section id="config" class="section">
     <div class="container">
-      <h2>Configuração</h2>
+      <h2><i class="fas fa-cog fa-spin"></i> Configuração</h2>
       <p>
-        Utilize o formulário abaixo para escolher um <strong>horário específico</strong> 
-        ou um <strong>intervalo em minutos</strong> para desligar o computador. 
+        Utilize o formulário abaixo para escolher um <strong>horário específico</strong>
+        ou um <strong>intervalo em minutos</strong> para desligar o computador.
         Você também pode cancelar a qualquer momento se precisar continuar usando a máquina.
       </p>
 
       <div class="form-container">
         <h3 class="form-title">Agende o Desligamento</h3>
-        
+
         <label for="horaDesligamento">Horário específico (HH:MM):</label>
         <input type="time" id="horaDesligamento">
 
@@ -115,4 +118,5 @@
 
   <script src="/js/script.js"></script>
 </body>
+
 </html>
