@@ -3,7 +3,7 @@
 Bem-vindo(a) ao **AutoDesliga**!  
 Este repositório contém uma aplicação web que permite agendar o desligamento automático do computador, de maneira simples, intuitiva e com um design moderno. Atualmente, o projeto foca em sistemas Windows, mas pode ser facilmente adaptado para Linux ou macOS.
 
-![Captura de Tela da Aplicação](./public/imgs/AutoDesliga_preview.png)
+![Captura de Tela da Aplicação](./public/imgs/Preview-tela.png)
 
 ---
 
