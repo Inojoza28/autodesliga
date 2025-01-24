@@ -12,13 +12,6 @@ Este repositório contém uma aplicação web que permite agendar o desligamento
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Pré-Requisitos](#pré-requisitos)
 - [Instalação](#instalação)
-- [Uso](#uso)
-- [Estrutura de Pastas](#estrutura-de-pastas)
-- [Como Funciona](#como-funciona)
-- [Personalização](#personalização)
-- [Contribuindo](#contribuindo)
-- [Licença](#licença)
-- [Contato](#contato)
 
 ---
 
