@@ -62,5 +62,5 @@ A aplicação pode ser acessada via navegador, executando um **servidor Node.js*
 
 1. **Clonar o repositório** (ou baixe o ZIP):
    ```bash
-   git clone https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git
-   cd NOME_DO_REPOSITORIO
+   git clone https://github.com/inojoza28/autodesliga.git
+   cd autodesliga
