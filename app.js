@@ -129,7 +129,7 @@ app.post('/cancel', (req, res) => {
  * Inicia o servidor na porta especificada.
  * Após iniciar, exibe uma mensagem no console com o endereço do servidor.
  */
-const PORT = 3000; // Porta em que o servidor irá escutar
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
+  console.log(`Servidor rodando na porta ${PORT}`);
 });

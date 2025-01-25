@@ -1,15 +1,17 @@
 {
   "name": "meu-projeto-desligamento",
   "version": "1.0.0",
-  "description": "",
+  "description": "Bem-vindo(a) ao **AutoDesliga**!  \r Este repositório contém uma aplicação web que permite agendar o desligamento automático do computador, de maneira simples, intuitiva e com um design moderno. Atualmente, o projeto foca em sistemas Windows, mas pode ser facilmente adaptado para Linux ou macOS.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+     "start": "node app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.7",
     "express": "^4.21.2"
-  }
+  },
+  "devDependencies": {}
 }
