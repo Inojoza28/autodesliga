@@ -351,7 +351,7 @@
                   </div>
                 </div>
                 <p class="text-gray-600 italic mb-2">"Utilizo o AutoDesliga todos os dias para programar o desligamento quando assisto séries antes de dormir. Simples e funciona perfeitamente!"</p>
-                <p class="font-medium text-secondary">Carlos G.</p>
+                <p class="font-medium text-secondary">Ana K.</p>
               </div>
             </div>
           </div>
@@ -374,7 +374,7 @@
                   </div>
                 </div>
                 <p class="text-gray-600 italic mb-2">"Excelente aplicativo! Programo downloads grandes e deixo o PC configurado para desligar automaticamente quando terminar. Recomendo!"</p>
-                <p class="font-medium text-secondary">Ana K.</p>
+                <p class="font-medium text-secondary">Carlos G.</p>
               </div>
             </div>
           </div>
@@ -400,6 +400,7 @@
   <footer class="bg-gray-900 text-gray-400 py-12">
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row justify-between items-center">
+        <!-- Seção do Logo -->
         <div class="flex flex-col items-center md:items-start mb-6 md:mb-0">
           <div class="flex items-center mb-4">
             <img src="/imgs/Logo.png" alt="Logo do Site" class="w-8 mr-2">
@@ -407,29 +408,31 @@
           </div>
           <p class="text-sm text-center md:text-left">Simplifique sua rotina com desligamento automático</p>
         </div>
-        
-        <div class="grid grid-cols-2 gap-8 md:gap-16">
-          <div>
-            <h3 class="text-white font-medium mb-4">Navegação</h3>
-            <ul class="space-y-2">
-              <li><a href="#conceito" class="hover:text-white transition-colors">Conceito</a></li>
-              <li><a href="#funcionamento" class="hover:text-white transition-colors">Funcionamento</a></li>
-              <li><a href="#config" class="hover:text-white transition-colors">Configuração</a></li>
-              <li><a href="#beneficios" class="hover:text-white transition-colors">Benefícios</a></li>
-            </ul>
-          </div>
-          <div>
+  
+        <!-- Navegação Centralizada em Mobile -->
+        <div class="w-full md:w-auto flex justify-center"> <!-- Alteração importante aqui -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16"> <!-- Alteração para 1 coluna em mobile -->
+            <div>
+              <h3 class="text-white font-medium mb-4 text-center md:text-left">Navegação</h3> <!-- Centralizado em mobile -->
+              <ul class="space-y-2 text-center md:text-left"> <!-- Centralizado em mobile -->
+                <li><a href="#conceito" class="hover:text-white transition-colors">Conceito</a></li>
+                <li><a href="#funcionamento" class="hover:text-white transition-colors">Funcionamento</a></li>
+                <li><a href="#config" class="hover:text-white transition-colors">Configuração</a></li>
+                <li><a href="#beneficios" class="hover:text-white transition-colors">Benefícios</a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-      
+  
+      <!-- Direitos Reservados Centralizados -->
       <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-        <p class="text-sm">&copy; 2025 – AutoDesliga. Todos os direitos reservados.</p>
+        <p class="text-sm text-center md:text-left">&copy; 2025 – AutoDesliga. Todos os direitos reservados.</p> <!-- Centralizado em mobile -->
         <div class="flex space-x-4 mt-4 md:mt-0">
-          <a href="https://www.linkedin.com/in/gabrielinojoza/" target="_blank"  class="text-gray-400 hover:text-white transition-colors">
+          <a href="https://www.linkedin.com/in/gabrielinojoza/" target="_blank" class="text-gray-400 hover:text-white transition-colors">
             <i class="fab fa-linkedin"></i>
           </a>
-          <a href="https://www.instagram.com/dev_inojoza_/" target="_blank"  class="text-gray-400 hover:text-white transition-colors">
+          <a href="https://www.instagram.com/dev_inojoza_/" target="_blank" class="text-gray-400 hover:text-white transition-colors">
             <i class="fab fa-instagram"></i>
           </a>
           <a href="https://github.com/Inojoza28" target="_blank" class="text-gray-400 hover:text-white transition-colors">
