@@ -5,6 +5,10 @@ const express = require('express');    // Framework web para Node.js
 const path = require('path');          // Módulo para manipulação de caminhos de arquivos
 const { exec } = require('child_process'); // Função para executar comandos do sistema
 
+// Verifica o sistema operacional e ambiente
+const isWindows = process.platform === 'win32';
+const isProduction = process.env.NODE_ENV === 'production'; // Detecta ambiente de produção
+
 // Cria uma instância do aplicativo Express
 const app = express();
 
@@ -64,6 +68,13 @@ app.get('/', (req, res) => {
  * Executa o comando de desligamento no sistema operacional.
  */
 app.post('/schedule', (req, res) => {
+  // Bloqueia a funcionalidade em ambiente de produção
+  if (isProduction) {
+    return res.status(403).json({
+      message: 'Funcionalidade desativada em ambiente de hospedagem'
+    });
+  }
+
   // Extrai 'hora' e 'tempoMinutos' do corpo da requisição
   const { hora, tempoMinutos } = req.body;
 
@@ -85,8 +96,10 @@ app.post('/schedule', (req, res) => {
     });
   }
 
-  // Comando de desligamento para o Windows com o tempo especificado
-  const comando = `shutdown /s /t ${totalSegundos}`;
+  // Comando de desligamento adaptado para Windows/Linux
+  const comando = isWindows
+    ? `shutdown /s /t ${totalSegundos}` // Comando Windows
+    : `shutdown -h +${Math.ceil(totalSegundos / 60)}`; // Comando Linux (converte segundos para minutos)
 
   // Executa o comando no sistema operacional
   exec(comando, (error) => {
@@ -109,8 +122,20 @@ app.post('/schedule', (req, res) => {
  * Recebe requisições via método POST e executa o comando de cancelamento.
  */
 app.post('/cancel', (req, res) => {
-  // Comando de cancelamento de desligamento no Windows
-  exec('shutdown /a', (error) => {
+  // Bloqueia a funcionalidade em ambiente de produção
+  if (isProduction) {
+    return res.status(403).json({
+      message: 'Funcionalidade desativada em ambiente de hospedagem'
+    });
+  }
+
+  // Comando de cancelamento adaptado para Windows/Linux
+  const comando = isWindows
+    ? 'shutdown /a' // Comando Windows
+    : 'shutdown -c'; // Comando Linux
+
+  // Executa o comando no sistema operacional
+  exec(comando, (error) => {
     if (error) {
       // Em caso de erro, loga no console e retorna erro 500
       console.error('Erro ao cancelar desligamento:', error.message);
