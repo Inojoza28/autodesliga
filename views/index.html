@@ -1,4 +1,3 @@
-<!-- views/index.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -8,117 +7,521 @@
   <meta name="keywords" content="AutoDesliga, desligamento automático, programação de desligamento, economia de energia, desligar computador, praticidade, automação, tecnologia" />
   <title>AutoDesliga - Desligamento Automático</title>
 
-  <!-- Import da Fonte (Exemplo: 'Poppins') -->
+  <!-- Import da Fonte -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="icon" href="imgs/Logo.png">
-  <!-- CSS principal -->
-  <link rel="stylesheet" href="/css/styles.css">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#1e6f6f',
+              light: '#2a9393',
+              dark: '#115454',
+              50: '#e6f5f5',
+              100: '#ccebeb',
+              200: '#99d6d6',
+              800: '#0d4242'
+            },
+            secondary: {
+              DEFAULT: '#2d3748',
+              light: '#4a5568'
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          animation: {
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          }
+        }
+      }
+    }
+  </script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <style>
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+    
+    .gradient-primary {
+      background: linear-gradient(135deg, #1e6f6f 0%, #115454 100%);
+    }
+    
+    .gradient-secondary {
+      background: linear-gradient(135deg, #2a9393 0%, #1e6f6f 100%);
+    }
+    
+    .hover-lift {
+      transition: all 0.3s ease;
+    }
+    
+    .hover-lift:hover {
+      transform: translateY(-3px);
+    }
+
+    .input-focus {
+      transition: all 0.2s ease;
+    }
+    
+    .input-focus:focus {
+      box-shadow: 0 0 0 3px rgba(30, 111, 111, 0.2);
+    }
+    
+    /* Glassmorphism */
+    .glass {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(8px);
+    }
+
+    /* Micro-animations */
+    .animated-icon {
+      transition: transform 0.5s ease;
+    }
+    
+    .animated-icon:hover {
+      transform: rotate(15deg);
+    }
+    
+    /* Animação do card */
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
 </head>
 
-<body>
+<body class="font-sans text-secondary bg-gray-50">
   <!-- Cabeçalho -->
-  <header class="site-header">
-    <div class="container header-container">
-      <h1 class="logo">
-        <img src="/imgs/Logo.png" alt="Logo do Site" class="site-logo">
-        AutoDesliga
-      </h1>
+  <header class="bg-white sticky top-0 z-50 shadow-sm backdrop-blur-md bg-opacity-90">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <img src="/imgs/Logo.png" alt="Logo do Site" class="w-8 md:w-9">
+        <h1 class="font-bold text-xl text-primary">AutoDesliga</h1>
+      </div>
+      
+      <!-- Menu Hambúrguer para Mobile -->
+      <div class="md:hidden">
+        <button type="button" class="text-gray-600 hover:text-primary focus:outline-none" id="menuBtn">
+          <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+            <path id="menuIcon" d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            <path id="closeIcon" class="hidden" d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+        </button>
+      </div>
 
-      <nav>
-        <ul class="nav-links">
-          <li><a href="#conceito">Conceito</a></li>
-          <li><a href="#funcionamento">Funcionamento</a></li>
-          <li><a href="#config">Configuração</a></li>
+      <!-- Menu de Navegação Desktop -->
+      <nav class="hidden md:block">
+        <ul class="flex space-x-8">
+          <li><a href="#conceito" class="font-medium text-gray-600 hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">Conceito</a></li>
+          <li><a href="#funcionamento" class="font-medium text-gray-600 hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">Funcionamento</a></li>
+          <li><a href="#config" class="font-medium text-gray-600 hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">Configuração</a></li>
+          <li><a href="#beneficios" class="font-medium text-gray-600 hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">Benefícios</a></li>
         </ul>
       </nav>
     </div>
+    
+    <!-- Menu Mobile (expandível) -->
+    <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 pt-2">
+      <ul class="flex flex-col space-y-3">
+        <li><a href="#conceito" class="block py-2 px-3 text-gray-600 hover:text-primary rounded-lg hover:bg-gray-100 transition-colors">Conceito</a></li>
+        <li><a href="#funcionamento" class="block py-2 px-3 text-gray-600 hover:text-primary rounded-lg hover:bg-gray-100 transition-colors">Funcionamento</a></li>
+        <li><a href="#config" class="block py-2 px-3 text-gray-600 hover:text-primary rounded-lg hover:bg-gray-100 transition-colors">Configuração</a></li>
+        <li><a href="#beneficios" class="block py-2 px-3 text-gray-600 hover:text-primary rounded-lg hover:bg-gray-100 transition-colors">Benefícios</a></li>
+      </ul>
+    </div>
   </header>
 
-  <!-- Seção: Conceito -->
-  <section id="conceito" class="section section-gradient">
-    <div class="container">
-      <h2><i class="fas fa-computer"></i>
-        Conceito</h2>
-      <p>
-        O <strong>AutoDesliga</strong> é uma aplicação simples, porém muito útil,
-        que permite ao usuário programar o desligamento automático do computador
-        de forma segura e conveniente.
-      </p>
-      <p>
-        É especialmente indicado para aqueles que assistem a vídeos ou ouvem música antes
-        de dormir e não querem deixar o PC ligado a noite toda.
-        Também é ideal para quem deseja economizar energia ou precisa de um
-        desligamento temporizado para outros cenários, como downloads e backups.
-      </p>
-    </div>
-  </section>
-
-  <!-- Seção: Como Funciona -->
-  <section id="funcionamento" class="section bg-light">
-    <div class="container">
-      <h2><i class="fas fa-diagram-project"></i>
-        Como Funciona</h2>
-      <p>
-        Nosso sistema utiliza os comandos nativos do Windows para agendar o desligamento.
-        Basta informar um horário exato (<em>HH:MM</em>) ou um intervalo em minutos.
-        É possível também cancelar a qualquer momento, se você mudar de ideia.
-      </p>
-      <p>
-        Internamente, o aplicativo envia o comando <code>shutdown /s /t SEGUNDOS</code>,
-        que instrui o Windows a desligar de forma segura após o período especificado.
-        O cancelamento é feito via <code>shutdown /a</code>, evitando o
-        desligamento pendente.
-      </p>
-    </div>
-  </section>
-
-  <!-- Seção: Configuração da Aplicação -->
-  <section id="config" class="section">
-    <div class="container">
-      <h2><i class="fas fa-cog fa-spin"></i> Configuração</h2>
-      <p>
-        Utilize o formulário abaixo para escolher um <strong>horário específico</strong>
-        ou um <strong>intervalo em minutos</strong> para desligar o computador.
-        Você também pode cancelar a qualquer momento se precisar continuar usando a máquina.
-      </p>
-
-      <div class="form-container">
-        <h3 class="form-title">Agende o Desligamento</h3>
-
-        <label for="horaDesligamento">Horário específico (HH:MM):</label>
-        <input type="time" id="horaDesligamento">
-
-        <label for="tempoDesligamento">Ou desligar após X minutos:</label>
-        <input type="number" id="tempoDesligamento" min="1" placeholder="Ex: 30">
-
-        <div class="buttons-row">
-          <button class="btn btn-primary" onclick="agendarDesligamento()">Agendar</button>
-          <button class="btn btn-secondary" onclick="cancelarDesligamento()">Cancelar</button>
+  <!-- Hero Section -->
+  <section class="gradient-primary py-20 md:py-28 lg:py-32 relative overflow-hidden">
+    <!-- Elementos decorativos (círculos) -->
+    <div class="absolute top-0 left-0 w-64 h-64 rounded-full bg-primary-light opacity-10 -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-primary-light opacity-10 translate-x-1/3 translate-y-1/3"></div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+          Desligamento Automático <span class="block">Inteligente e Simples</span>
+        </h2>
+        <p class="text-primary-100 text-lg md:text-xl mb-10 leading-relaxed">
+          Economize energia e simplifique sua rotina programando o desligamento 
+          do seu computador de forma intuitiva e precisa
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="#config" class="bg-white text-primary hover:bg-gray-100 py-3 px-8 rounded-lg font-semibold hover-lift shadow-lg inline-flex items-center justify-center">
+            <i class="fas fa-clock mr-2"></i> Programar Agora
+          </a>
+          <a href="#beneficios" class="bg-primary-800 text-white hover:bg-primary-dark py-3 px-8 rounded-lg font-semibold hover-lift shadow-lg inline-flex items-center justify-center">
+            <i class="fas fa-info-circle mr-2"></i> Saiba Mais
+          </a>
         </div>
-
-        <div class="status" id="statusArea">Nenhum desligamento agendado.</div>
       </div>
     </div>
   </section>
 
-  <!-- Rodapé -->
-  <footer class="site-footer">
-    <div class="container">
-      <p class="footer-text">
-        <!-- &copy; 2025 –  -->
-        <strong>AutoDesliga</strong>
-        <!-- . Todos os direitos reservados. -->
+  <!-- Seção: Conceito -->
+  <section id="conceito" class="py-16 md:py-20 relative">
+    <!-- Detalhe decorativo -->
+    <div class="absolute right-0 top-0 w-40 h-40 bg-primary-50 rounded-bl-full opacity-50"></div>
+    
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto">
+        <div class="flex items-center mb-6">
+          <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary-50 text-primary mr-4">
+            <i class="fas fa-computer text-xl animated-icon"></i>
+          </span>
+          <h2 class="text-2xl md:text-3xl font-bold text-secondary">Conceito</h2>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-sm p-6 md:p-8 card-hover">
+          <p class="mb-6 text-gray-700 leading-relaxed">
+            O <strong class="text-primary font-medium">AutoDesliga</strong> é uma aplicação simples, porém muito útil,
+            que permite ao usuário programar o desligamento automático do computador
+            de forma segura e conveniente.
+          </p>
+          <div class="p-4 bg-primary-50 rounded-lg border-l-4 border-primary-light">
+            <p class="text-gray-700">
+              <i class="fas fa-lightbulb text-primary-light mr-2"></i>
+              Ideal para quem assiste vídeos ou ouve música antes de dormir e não quer deixar o PC ligado toda a noite. 
+              Também perfeito para economizar energia e programar desligamentos após downloads ou backups.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção: Como Funciona -->
+  <section id="funcionamento" class="py-16 md:py-20 bg-gray-50 relative">
+    
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto">
+        <div class="flex items-center mb-6">
+          <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary-50 text-primary mr-4">
+            <i class="fas fa-diagram-project text-xl animated-icon"></i>
+          </span>
+          <h2 class="text-2xl md:text-3xl font-bold text-secondary">Como Funciona</h2>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-sm p-6 md:p-8 card-hover">
+          <p class="mb-6 text-gray-700 leading-relaxed">
+            Nosso sistema utiliza os comandos nativos do Windows para agendar o desligamento de forma confiável.
+            Basta informar um horário exato ou um intervalo em minutos, com a flexibilidade de cancelar quando necessário.
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="p-4 rounded-lg bg-gray-50 border border-gray-100">
+              <h4 class="font-medium text-primary mb-2 flex items-center">
+                <i class="fas fa-clock mr-2"></i> Programação
+              </h4>
+              <p class="text-gray-600 text-sm">
+                Utilize o formulário para configurar o tempo desejado para o desligamento automático.
+              </p>
+            </div>
+            <div class="p-4 rounded-lg bg-gray-50 border border-gray-100">
+              <h4 class="font-medium text-primary mb-2 flex items-center">
+                <i class="fas fa-terminal mr-2"></i> Execução
+              </h4>
+              <p class="text-gray-600 text-sm">
+                O aplicativo converte seu input para o comando nativo do Windows.
+              </p>
+            </div>
+          </div>
+          
+          <div class="bg-gray-800 text-gray-200 p-4 rounded-lg font-mono text-sm overflow-x-auto">
+            <p class="mb-2"><span class="text-green-400"># Comando usado para agendamento:</span></p>
+            <p class="text-primary-light">shutdown /s /t <span class="text-yellow-300">SEGUNDOS</span></p>
+            <p class="mt-3 mb-2"><span class="text-green-400"># Comando usado para cancelamento:</span></p>
+            <p class="text-primary-light">shutdown /a</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção: Configuração da Aplicação -->
+  <section id="config" class="py-16 md:py-16 relative">
+    <!-- Detalhe decorativo -->
+    <div class="absolute right-0 bottom-0 w-40 h-40 bg-primary-50 rounded-tl-full opacity-50"></div>
+    
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto">
+        <div class="flex items-center mb-6">
+          <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary-50 text-primary mr-4">
+            <i class="fas fa-sliders text-xl animated-icon"></i>
+          </span>
+          <h2 class="text-2xl md:text-3xl font-bold text-secondary">Configuração</h2>
+        </div>
+        
+        <p class="mb-6 text-gray-700 leading-relaxed">
+          Utilize o painel abaixo para escolher um <strong>horário específico</strong>
+          ou um <strong>intervalo em minutos</strong> para desligar o computador.
+          Você pode cancelar o agendamento a qualquer momento.
+        </p>
+
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 border border-gray-100 card-hover">
+          <h3 class="text-xl font-semibold mb-6 text-primary flex items-center">
+            <i class="fas fa-clock mr-2"></i> Agende o Desligamento
+          </h3>
+
+          <div class="mb-6">
+            <label for="horaDesligamento" class="block text-gray-700 font-medium mb-2">
+              Horário específico (HH:MM):
+            </label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+              <input type="time" id="horaDesligamento" 
+                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg input-focus outline-none">
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-primary opacity-75">
+                <i class="fas fa-chevron-down text-sm"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <label for="tempoDesligamento" class="block text-gray-700 font-medium mb-2">
+              Ou desligar após X minutos:
+            </label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+                <i class="fas fa-hourglass-half"></i>
+              </div>
+              <input type="number" id="tempoDesligamento" min="1" placeholder="Ex: 30" 
+                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg input-focus outline-none">
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-primary opacity-75">
+                <span class="text-sm font-medium text-gray-500">min</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0">
+            <button class="gradient-primary hover:shadow-lg text-white font-medium py-3 px-6 rounded-lg transition-all hover-lift flex-1 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 group" onclick="agendarDesligamento()">
+              <span class="flex items-center justify-center">
+                <i class="fas fa-power-off mr-2 group-hover:animate-pulse"></i> Agendar Desligamento
+              </span>
+            </button>
+            <button class="bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-6 rounded-lg transition-all hover-lift flex-1 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2" onclick="cancelarDesligamento()">
+              <span class="flex items-center justify-center">
+                <i class="fas fa-ban mr-2"></i> Cancelar
+              </span>
+            </button>
+          </div>
+
+          <div id="statusArea" class="mt-6 p-4 rounded-lg bg-gray-50 border border-gray-200 text-center relative overflow-hidden">
+            <div class="flex items-center justify-center">
+              <i class="fas fa-info-circle mr-2 text-primary"></i>
+              <span class="font-medium">Nenhum desligamento agendado.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="beneficios" class="py-16 md:py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary-50 text-primary mb-4 mx-auto">
+          <i class="fas fa-star text-xl animated-icon"></i>
+        </span>
+        <h2 class="text-2xl md:text-3xl font-bold text-secondary">Por que usar o AutoDesliga?</h2>
+        <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+          Nossa solução oferece vários benefícios para otimizar sua experiência e economizar recursos
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <!-- Benefício 1 -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 card-hover">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-50 text-green-600 mb-4">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-secondary">Economia de Energia</h3>
+          <p class="text-gray-600">
+            Reduza seu consumo de energia e ajude o meio ambiente evitando que seu computador permaneça ligado desnecessariamente.
+          </p>
+        </div>
+        
+        <!-- Benefício 2 -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 card-hover">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-50 text-blue-600 mb-4">
+            <i class="fas fa-wand-magic-sparkles"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-secondary">Interface Intuitiva</h3>
+          <p class="text-gray-600">
+            Design simples e direto ao ponto. Configure o desligamento em poucos segundos, sem complicações ou conhecimentos técnicos.
+          </p>
+        </div>
+        
+        <!-- Benefício 3 -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 card-hover">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-purple-50 text-purple-600 mb-4">
+            <i class="fas fa-shield"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-secondary">Confiabilidade</h3>
+          <p class="text-gray-600">
+            Utilizamos os comandos nativos do sistema operacional para garantir uma operação segura e confiável em qualquer situação.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Depoimentos -->
+      <div class="mt-16">
+        <h3 class="text-xl font-bold text-center mb-8 text-secondary">O que nossos usuários dizem</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 card-hover">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 mr-4">
+                <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
+                  <i class="fas fa-user text-xl"></i>
+                </div>
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <div class="text-yellow-400 flex">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                </div>
+                <p class="text-gray-600 italic mb-2">"Utilizo o AutoDesliga todos os dias para programar o desligamento quando assisto séries antes de dormir. Simples e funciona perfeitamente!"</p>
+                <p class="font-medium text-secondary">Carlos G.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 card-hover">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 mr-4">
+                <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
+                  <i class="fas fa-user text-xl"></i>
+                </div>
+              </div>
+              <div>
+                <div class="flex items-center mb-1">
+                  <div class="text-yellow-400 flex">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                </div>
+                <p class="text-gray-600 italic mb-2">"Excelente aplicativo! Programo downloads grandes e deixo o PC configurado para desligar automaticamente quando terminar. Recomendo!"</p>
+                <p class="font-medium text-secondary">Ana K.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="gradient-secondary py-16">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold text-white mb-6">Comece a usar o AutoDesliga agora mesmo</h2>
+      <p class="text-primary-100 mb-8 max-w-2xl mx-auto">
+        Aproveite todos os benefícios de um desligamento automatizado inteligente e economize energia
       </p>
+      <a href="#config" class="bg-white text-primary hover:bg-gray-100 py-3 px-10 rounded-lg font-semibold hover-lift shadow-lg inline-flex items-center justify-center">
+        <i class="fas fa-arrow-up mr-2"></i> Voltar para Configuração
+      </a>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="bg-gray-900 text-gray-400 py-12">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="flex flex-col items-center md:items-start mb-6 md:mb-0">
+          <div class="flex items-center mb-4">
+            <img src="/imgs/Logo.png" alt="Logo do Site" class="w-8 mr-2">
+            <span class="font-semibold text-xl text-white">AutoDesliga</span>
+          </div>
+          <p class="text-sm text-center md:text-left">Simplifique sua rotina com desligamento automático</p>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-8 md:gap-16">
+          <div>
+            <h3 class="text-white font-medium mb-4">Navegação</h3>
+            <ul class="space-y-2">
+              <li><a href="#conceito" class="hover:text-white transition-colors">Conceito</a></li>
+              <li><a href="#funcionamento" class="hover:text-white transition-colors">Funcionamento</a></li>
+              <li><a href="#config" class="hover:text-white transition-colors">Configuração</a></li>
+              <li><a href="#beneficios" class="hover:text-white transition-colors">Benefícios</a></li>
+            </ul>
+          </div>
+          <div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-sm">&copy; 2025 – AutoDesliga. Todos os direitos reservados.</p>
+        <div class="flex space-x-4 mt-4 md:mt-0">
+          <a href="https://www.linkedin.com/in/gabrielinojoza/" target="_blank"  class="text-gray-400 hover:text-white transition-colors">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://www.instagram.com/dev_inojoza_/" target="_blank"  class="text-gray-400 hover:text-white transition-colors">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://github.com/Inojoza28" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+      </div>
     </div>
   </footer>
 
   <script src="/js/script.js"></script>
-</body>
+  <script>
 
+    // Menu responsivo
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuButton = document.getElementById('menuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const menuIcon = document.getElementById('menuIcon');
+      const closeIcon = document.getElementById('closeIcon');
+      
+      menuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+        menuIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+      });
+      
+      // Fechar menu ao clicar em links
+      const mobileLinks = document.querySelectorAll('#mobileMenu a');
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          mobileMenu.classList.add('hidden');
+          menuIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        });
+      });
+    });
+
+  </script>
+</body>
 </html>
